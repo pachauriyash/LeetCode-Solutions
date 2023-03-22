@@ -12,6 +12,8 @@
 class Solution {
 public:
     int count=0;
+    /* //brute force solution
+    
     int heightt(TreeNode* root){
         int leftheight;
         int rightheight;
@@ -38,5 +40,22 @@ public:
         int ans=count;
         count=0;
         return ans;
+    } */
+    //optimised solution
+    int heightt(TreeNode* root){
+        int leftheight;
+        int rightheight;
+        if(root==NULL){return 0;}
+        leftheight=heightt(root->left);
+        rightheight=heightt(root->right);
+        if(count<leftheight+rightheight){count=leftheight+rightheight;}
+        if(leftheight>rightheight){return leftheight+1;}
+        else{return rightheight+1;}
     }
+    int diameterOfBinaryTree(TreeNode* root) {
+        heightt(root);
+        int ans=count;
+        count=0;
+        return ans;
+    } 
 };

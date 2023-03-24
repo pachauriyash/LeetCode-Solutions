@@ -22,13 +22,10 @@ class Solution {
 public:
     void preorder(Node* root,vector<int>&v){
         if(root==NULL){return;}
-        vector<Node*> temp=root->children;
+        //vector<Node*> temp=root->children;
         v.push_back(root->val);
-        for(int i=0;i<temp.size();i++){
-            Node* curr=temp[i];
-            
-            preorder(curr,v);
-            
+        for(int i=0;i<root->children.size();i++){        
+            preorder(root->children[i],v);   
         }
     }
     vector<int> preorder(Node* root) {

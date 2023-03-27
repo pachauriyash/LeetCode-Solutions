@@ -11,29 +11,30 @@
  */
 class Solution {
 public:
-    int findpos(vector<int>ino,int element){
+    void createmap(vector<int>ino,map<int,int>&nodetoindex){
         for(int i=0;i<ino.size();i++){
-            if(ino[i]==element){return i;}
+            nodetoindex[ino[i]]=i;
         }
-        return -1;
     }
-    TreeNode* solve(vector<int> pre,vector<int>ino,int &index,int inorderstart,int inorderend){
+    TreeNode* solve(vector<int> pre,vector<int>ino,int &index,int inorderstart,int inorderend,map<int,int>&nodetoindex){
         if(index>=ino.size() || inorderstart>inorderend){
             return NULL;
         }
         int element=pre[index++];
         TreeNode* temp=new TreeNode(element);
-        int position=findpos(ino,element);
+        int position=nodetoindex[element];
         
         //recursion
-        temp->left=solve(pre,ino,index,inorderstart,position-1);
-        temp->right=solve(pre,ino,index,position+1,inorderend);
+        temp->left=solve(pre,ino,index,inorderstart,position-1,nodetoindex);
+        temp->right=solve(pre,ino,index,position+1,inorderend,nodetoindex);
         return temp;
 
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int preindex=0;
-        TreeNode* ans=solve(preorder,inorder,preindex,0,inorder.size()-1);
+        map<int,int> nodetoindex;
+        createmap(inorder,nodetoindex);
+        TreeNode* ans=solve(preorder,inorder,preindex,0,inorder.size()-1,nodetoindex);
         return ans;
     }
 };

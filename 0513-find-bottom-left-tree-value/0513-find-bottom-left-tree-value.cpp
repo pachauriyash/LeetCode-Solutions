@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    /*
     int maxDepth(TreeNode* root) {
         int leftheight;
         int rightheight;
@@ -51,5 +52,17 @@ public:
         int ans=0;
         levelorder(root,depth,ans);
         return ans;
+    } */
+    int findBottomLeftValue(TreeNode* root) {
+        queue<TreeNode*> q;
+        q.push(root);
+        TreeNode* temp;
+        while(!q.empty()){
+            temp=q.front();
+            q.pop();
+            if(temp->right){q.push(temp->right);}
+            if(temp->left){q.push(temp->left);}
+        }
+        return temp->val;
     }
 };

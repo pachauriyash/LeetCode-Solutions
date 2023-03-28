@@ -20,13 +20,29 @@ vector<int> preorder(TreeNode* root){
 
 class Solution {
     public:
-    vector<int>ans;
+    //vector<int>ans;
     vector<int> preorderTraversal(TreeNode* root) {
-        if(root){
+        /*if(root){
             ans.push_back(root->val);
             preorderTraversal(root->left);
             preorderTraversal(root->right);
         }
-        return ans;
+        return ans; */
+        vector<int> v;
+        stack<TreeNode*> st;
+        TreeNode* curr=root;
+        while(!st.empty() || curr!=NULL){
+            if(curr!=NULL){
+                st.push(curr);
+                v.push_back(curr->val);
+                curr=curr->left;
+            }
+            else{
+                curr=st.top();
+                st.pop();
+                curr=curr->right;
+            }
+        }
+        return v;
     }
 };

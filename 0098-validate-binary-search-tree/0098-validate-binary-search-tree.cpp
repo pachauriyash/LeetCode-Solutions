@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    /*
     void inorder(TreeNode* root,vector<int>& v){
         if(root==NULL){return;}
         inorder(root->left,v);
@@ -25,5 +26,21 @@ public:
             if(v[i]>=v[i+1]){return false;}
         }
         return true;
+    } */
+    bool isbst(TreeNode* root,long min,long max){
+        if(root==NULL){return true;}
+        if(root->val>min && root->val<max){
+            bool left=isbst(root->left,min,root->val);
+            bool right=isbst(root->right,root->val,max);
+            return left&&right;
+        }
+        else{
+            return false;
+        }
+        
     }
+    bool isValidBST(TreeNode* root) {
+        return isbst(root,LONG_MIN,LONG_MAX);
+        
+    } 
 };

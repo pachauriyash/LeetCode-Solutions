@@ -8,6 +8,7 @@ class Solution{
 public:
     vector<int> findTwoElement(vector<int> arr, int n) {
         // code here
+        /*
         map<int,int> mp;
         vector<int> ans;
         for(int i=0;i<n;i++){
@@ -25,6 +26,21 @@ public:
             i++;
         }
         
+        return ans; */
+        //optimised solution
+        
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            if(arr[abs(arr[i])-1]<0){
+                ans.push_back(abs(arr[i]));
+            }
+            else{
+                arr[abs(arr[i])-1]*=-1;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]>0){ans.push_back(i+1);break;}
+        }
         return ans;
     }
 };

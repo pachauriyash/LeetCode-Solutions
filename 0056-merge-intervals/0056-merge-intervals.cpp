@@ -17,10 +17,11 @@ public:
                 end=ans[index][1];
             }
             else{
-                vector<int> temp;
-                temp.push_back(intervals[i][0]);
-                temp.push_back(intervals[i][1]);
-                ans.push_back(temp);
+                //vector<int> temp;
+                // temp.push_back(intervals[i][0]);
+                // temp.push_back(intervals[i][1]);
+                
+                ans.push_back(intervals[i]);
                 index++;
                 start=ans[index][0];
                 end=ans[index][1];

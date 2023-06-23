@@ -11,6 +11,7 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
+        /* brute force approach TC O(n+n/2)
         ListNode* temp=head;
         int middle;
         if(head==NULL){return 0;}
@@ -31,5 +32,14 @@ public:
             temp=temp->next;
         }
         return temp;
+        */
+        //optimal approach using slow and fast pointers
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
     }
 };

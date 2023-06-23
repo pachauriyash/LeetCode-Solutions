@@ -11,6 +11,7 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
+        /*brute force approach TC O(N)+O(N-n)
         ListNode* temp=head;
         int count=0;
         while(temp!=NULL){
@@ -27,6 +28,25 @@ public:
         }
         ListNode* curr=temp->next;
         temp->next=curr->next;
+        return head; 
+        */
+        //it will be done using two pointers
+        ListNode* delayed=NULL;
+        ListNode* normal=head;
+        if(head->next==NULL){head=head->next; return head;}
+        int count=1;
+        while(normal->next!=NULL){
+            normal=normal->next;
+            count++;
+            if(count>n){
+                if(delayed==NULL){delayed=head;}
+                else{delayed=delayed->next;}
+            }
+            
+        }
+        
+        if(delayed==NULL){head=head->next;}
+        else{delayed->next=delayed->next->next;}
         return head;
     }
 };

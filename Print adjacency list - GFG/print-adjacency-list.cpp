@@ -10,8 +10,12 @@ class Solution {
         // Code here
         vector<vector<int>> ans;
         for(int i=0;i<V;i++){
-            ans.push_back(adj[i]);
-            ans[i].insert(ans[i].begin(),i);
+            vector<int> temp;
+            temp.push_back(i);
+            for(auto it:adj[i]){
+                temp.push_back(it);
+            }
+            ans.push_back(temp);
         }
         return ans;
     }

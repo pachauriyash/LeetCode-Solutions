@@ -20,11 +20,14 @@ public:
             for(int i=0;i<4;i++){
                 int newrow=row+rowposs[i];
                 int newcol=col+colposs[i];
-                if(newrow>=0 && newrow<n && newcol>=0 && newcol<m && abs(grid[newrow][newcol]-grid[row][col])<dist[newrow][newcol]){
-                    dist[newrow][newcol]=abs(grid[newrow][newcol]-grid[row][col]);
+                if(newrow>=0 && newrow<n && newcol>=0 && newcol<m){
+                    int neweffort=max(abs(grid[newrow][newcol]-grid[row][col]),diff);
+                    if(neweffort<dist[newrow][newcol]){
+                        dist[newrow][newcol]=neweffort;
+                        qq.push({neweffort,{newrow,newcol}});
+                    }    
                 }
-                else{continue;}
-                qq.push({max(abs(grid[newrow][newcol]-grid[row][col]),diff),{newrow,newcol}});
+
             }
         }
         

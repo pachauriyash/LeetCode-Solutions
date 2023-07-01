@@ -16,13 +16,17 @@ public:
         int count=1;
         int size=0;
         ListNode* temp=head;
+        //taking the size of the linked list
         while(temp!=NULL){
             size++;
             temp=temp->next;
         }
+        //edge cases
         if(size==0){return head;}
+        //so that we don't have to repeat it multiple times as after size times the list becomes same
         int n=k%size;
         if(n==0){return head;}
+        //going to the n nodes back from end
         while(normal->next!=NULL){
             size++;
             normal=normal->next;
@@ -33,10 +37,11 @@ public:
             }
         }
         
-        //cout<<delayed->val;
+        //now just pointing them to correct position
         normal=delayed->next;
         delayed->next=NULL;
         delayed=normal;
+        //going to the end of the separate linked list section so that it can be made to point to the head
         while(delayed->next!=NULL){
             delayed=delayed->next;
         }

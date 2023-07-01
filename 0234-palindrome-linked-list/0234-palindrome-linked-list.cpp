@@ -23,26 +23,17 @@ public:
             fast=fast->next->next;
             cnt++;
         }
-
+        ListNode* start=NULL;
         if(fast==NULL){
             n=cnt*2;
-            ListNode* start=slow;
-        // ListNode* nexxt=start->next;
-           ListNode* prev=NULL;
-            while(start!=NULL){
-                ListNode* temp=start->next;
-                start->next=prev;
-                prev=start;
-                start=temp;
-            }
-            prev2->next=prev;
+            start=slow;   
         }
         else{
             n=cnt*2+1;
-            ListNode* start=slow->next;
+            start=slow->next;
             prev2=prev2->next;
-        // ListNode* nexxt=start->next;
-           ListNode* prev=NULL;
+        }
+        ListNode* prev=NULL;
             while(start!=NULL){
                 ListNode* temp=start->next;
                 start->next=prev;
@@ -50,7 +41,7 @@ public:
                 start=temp;
             }
             prev2->next=prev;
-        }
+        
         prev2=prev2->next;
         while(prev2!=NULL){
             if(head->val!=prev2->val){return false;}

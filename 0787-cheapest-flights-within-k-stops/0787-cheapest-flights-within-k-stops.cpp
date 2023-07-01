@@ -16,7 +16,7 @@ public:
             int stops=it.first;
             int node=it.second.first;
             int dis=it.second.second;
-            if(stops>k){continue;}
+            if(stops>k){break;}
             for(auto itr:adj[node]){
                 int adjnode=itr.first;
                 int edw=itr.second;

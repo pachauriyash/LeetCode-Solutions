@@ -21,22 +21,45 @@ public:
         // return ans;
         
         //now tabulation but my memorization was from 0,0 to bottom so if from that i would have to make tabulation then base cases will be be bottom row but here i'm going from up to down as in striver video
+        //TC O(N*N)+O(N) SC O(N*N)
+        // int n=matrix.size();
+        // vector<vector<int>> dp(n,vector<int>(n,INT_MAX));
+        // for(int j=0;j<n;j++)dp[0][j]=matrix[0][j];
+        // for(int i=1;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         int down=matrix[i][j]+dp[i-1][j];
+        //         int leftdiag=INT_MAX;
+        //         int rightdiag=INT_MAX;
+        //         if(j>0){leftdiag=matrix[i][j]+dp[i-1][j-1];}
+        //         if(j<n-1){rightdiag=matrix[i][j]+dp[i-1][j+1];}
+        //         dp[i][j]=min(down,min(leftdiag,rightdiag));
+        //     }
+        // }
+        // int ans=dp[n-1][0];
+        // for(int j=1;j<n;j++){
+        //     ans=min(ans,dp[n-1][j]);
+        // }
+        // return ans;
+        //space optimised
         int n=matrix.size();
-        vector<vector<int>> dp(n,vector<int>(n,INT_MAX));
-        for(int j=0;j<n;j++)dp[0][j]=matrix[0][j];
+        vector<int> prev(n,INT_MAX);
+        for(int j=0;j<n;j++)prev[j]=matrix[0][j];
         for(int i=1;i<n;i++){
+            vector<int>temp(n);
             for(int j=0;j<n;j++){
-                int down=matrix[i][j]+dp[i-1][j];
+                int down=matrix[i][j]+prev[j];
                 int leftdiag=INT_MAX;
                 int rightdiag=INT_MAX;
-                if(j>0){leftdiag=matrix[i][j]+dp[i-1][j-1];}
-                if(j<n-1){rightdiag=matrix[i][j]+dp[i-1][j+1];}
-                dp[i][j]=min(down,min(leftdiag,rightdiag));
+                if(j>0){leftdiag=matrix[i][j]+prev[j-1];}
+                if(j<n-1){rightdiag=matrix[i][j]+prev[j+1];}
+                temp[j]=min(down,min(leftdiag,rightdiag));
+                
             }
+            prev=temp;
         }
-        int ans=dp[n-1][0];
+        int ans=prev[0];
         for(int j=1;j<n;j++){
-            ans=min(ans,dp[n-1][j]);
+            ans=min(ans,prev[j]);
         }
         return ans;
     }

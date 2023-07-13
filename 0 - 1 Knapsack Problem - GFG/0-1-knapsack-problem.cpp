@@ -21,9 +21,21 @@ class Solution
     public:
     //Function to return max value that can be put in knapsack of capacity W.
     int knapSack(int W, int wt[], int val[], int n) 
-    { 
-        vector<vector<int>>dp(n,vector<int>(W+1,-1));
-       return recur(n-1,W,wt,val,dp);
+    {   //memorization TC O(N*W) SC O(N*W)+O(N)
+    //     vector<vector<int>>dp(n,vector<int>(W+1,-1));
+    //   return recur(n-1,W,wt,val,dp);
+       //tabulation
+       vector<vector<int>>dp(n,vector<int>(W+1,0));
+       for(int i=wt[0];i<=W;i++)dp[0][i]=val[0];
+       for(int index=1;index<n;index++){
+           for(int w=0; w<=W;w++){
+               int notpick=0+dp[index-1][w];
+               int pick=INT_MIN;
+               if(wt[index]<=w)pick=val[index]+dp[index-1][w-wt[index]];
+               dp[index][w]=max(pick,notpick);
+           }
+       }
+       return dp[n-1][W];
     }
 };
 

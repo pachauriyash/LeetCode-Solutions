@@ -17,13 +17,24 @@ public:
         //  vector<vector<int>>dp(text1.length(),vector<int>(text2.length(),-1));
         // return text1.length()-recur(text1.length()-1,text2.length()-1,text1,text2,dp);
         //tabulation TC O(N*N)+O(N) SC O(N*N)
-        vector<vector<int>>dp(text1.length()+1,vector<int>(text2.length()+1,0));
+        // vector<vector<int>>dp(text1.length()+1,vector<int>(text2.length()+1,0));
+        // for(int i=1;i<=text1.length();i++){
+        //     for(int j=1;j<=text2.length();j++){
+        //         if(text1[i-1]==text2[j-1]){dp[i][j]=1+dp[i-1][j-1];}
+        //         else{dp[i][j]=max(dp[i-1][j],dp[i][j-1]);}
+        //     }
+        // }
+        // return text1.length()-dp[text1.length()][text2.length()];
+        //space optimised
+        vector<int>prev(text2.length()+1,0),curr(text2.length()+1,0);
         for(int i=1;i<=text1.length();i++){
             for(int j=1;j<=text2.length();j++){
-                if(text1[i-1]==text2[j-1]){dp[i][j]=1+dp[i-1][j-1];}
-                else{dp[i][j]=max(dp[i-1][j],dp[i][j-1]);}
+                if(text1[i-1]==text2[j-1]){curr[j]=1+prev[j-1];}
+                else{curr[j]=max(prev[j],curr[j-1]);}
             }
+            prev=curr;
         }
-        return text1.length()-dp[text1.length()][text2.length()];
+        return text1.length()-prev[text2.length()];
+        
     }
 };

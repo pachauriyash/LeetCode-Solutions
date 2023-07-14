@@ -10,23 +10,37 @@ using namespace std;
 
 class Solution{
     private:
-    int recur(int index,int weight, int n,int val[],vector<vector<int>>&dp){
+    int recur(int index, int n,int price[],vector<vector<int>>&dp){
         //base case
-        if(index==n){
-            if(index<=weight){return val[n-1];}
-            else return 0;
+        if(index==0){
+            return n*price[0];
         }
        
-        if(dp[index][weight]!=-1)return dp[index][weight];
-        int notpick=0+recur(index+1,weight,n,val,dp);
+        if(dp[index][n]!=-1)return dp[index][n];
+        int notpick=0+recur(index-1,n,price,dp);
         int pick=INT_MIN;
-        if(index<=weight)pick=val[index-1]+recur(index,weight-index,n,val,dp);
-        return dp[index][weight]=max(pick,notpick);
+        if(index+1<=n)pick=price[index]+recur(index,n-(index+1),price,dp);
+        return dp[index][n]=max(pick,notpick);
     }
+    
   public:
     int cutRod(int price[], int n) {
-        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
-        return recur(1,n,n,price,dp);
+        vector<vector<int>>dp(n,vector<int>(n+1,-1));
+        return recur(n-1,n,price,dp);
+        //tabulation
+    //      vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+    //      for(int w=0;w<=n;w++){
+    //          if(n<=w){dp[n][w]=price[n-1];}
+    //      }
+    //      for(int index=n-1;index>=1;index--){
+    //       for(int weight=0; weight<=n;weight++){
+    //           int notpick=0+dp[index+1][weight];
+    //             int pick=INT_MIN;
+    //             if(index<=weight)pick=price[index-1]+dp[index+1][weight-index];
+    //           dp[index][weight]=max(pick,notpick);
+    //       }
+    //   }
+    //   return dp[n][n];
     }
 };
 

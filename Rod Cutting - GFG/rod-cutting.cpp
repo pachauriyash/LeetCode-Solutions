@@ -25,22 +25,23 @@ class Solution{
     
   public:
     int cutRod(int price[], int n) {
-        vector<vector<int>>dp(n,vector<int>(n+1,-1));
-        return recur(n-1,n,price,dp);
-        //tabulation
-    //      vector<vector<int>>dp(n+1,vector<int>(n+1,0));
-    //      for(int w=0;w<=n;w++){
-    //          if(n<=w){dp[n][w]=price[n-1];}
-    //      }
-    //      for(int index=n-1;index>=1;index--){
-    //       for(int weight=0; weight<=n;weight++){
-    //           int notpick=0+dp[index+1][weight];
-    //             int pick=INT_MIN;
-    //             if(index<=weight)pick=price[index-1]+dp[index+1][weight-index];
-    //           dp[index][weight]=max(pick,notpick);
-    //       }
-    //   }
-    //   return dp[n][n];
+        //memoriation TC O(N*N) SC O(N*N)+O(N)
+        // vector<vector<int>>dp(n,vector<int>(n+1,-1));
+        // return recur(n-1,n,price,dp);
+        //tabulation TC O(N*N) SC O(N*N)
+         vector<vector<int>>dp(n,vector<int>(n+1,0));
+         for(int N=0;N<=n;N++){
+            dp[0][N]=N*price[0];
+         }
+         for(int index=1;index<n;index++){
+          for(int N=0; N<=n;N++){
+              int notpick=0+dp[index-1][N];
+                int pick=INT_MIN;
+                if(index+1<=N)pick=price[index]+dp[index][N-(index+1)];
+              dp[index][N]=max(pick,notpick);
+          }
+      }
+      return dp[n-1][n];
     }
 };
 

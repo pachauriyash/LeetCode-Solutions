@@ -8,6 +8,7 @@ class Solution{
 
 	public:
 	int minOperations(string text1, string text2)
+	//so basically the logic is find the subsequnce which is common in both which has to not be touched, now the remaining in first string has to be deleted and similarly the difference from second string also has to be either deleted or added in first string
 	{ //space optimised LCsubseq solution
 	   vector<int>prev(text2.length()+1,0),curr(text2.length()+1,0);
         for(int i=1;i<=text1.length();i++){

@@ -16,17 +16,30 @@ public:
         //memoriation solution but this will also cause TLE bcz constraints are big
         // vector<vector<int>>dp(nums.size(),vector<int>(nums.size()+1,-1));
         // return recur(0,-1,nums,dp);
-        //tabultaion
-        vector<vector<int>>dp(nums.size()+1,vector<int>(nums.size()+1,0));
+        //tabultaion it got accepted though TC is same but here no recusive stack space so it got accepted
+        // vector<vector<int>>dp(nums.size()+1,vector<int>(nums.size()+1,0));
+        // for(int index=nums.size()-1;index>=0;index--){
+        //     for(int prev=index-1;prev>=-1;prev--){
+        //         int len=dp[index+1][prev+1];
+        //         if(prev==-1 || nums[index]>nums[prev]){
+        //             len=max(len,1+dp[index+1][index+1]);
+        //         }
+        //         dp[index][prev+1]=len;
+        //     }
+        // }
+        // return dp[0][-1+1];
+        //space optimised
+        vector<int>next(nums.size()+1,0),curr(nums.size()+1,0);
         for(int index=nums.size()-1;index>=0;index--){
             for(int prev=index-1;prev>=-1;prev--){
-                int len=dp[index+1][prev+1];
+                int len=next[prev+1];
                 if(prev==-1 || nums[index]>nums[prev]){
-                    len=max(len,1+dp[index+1][index+1]);
+                    len=max(len,1+next[index+1]);
                 }
-                dp[index][prev+1]=len;
+                curr[prev+1]=len;
             }
+            next=curr;
         }
-        return dp[0][-1+1];
+        return next[-1+1];
     }
 };

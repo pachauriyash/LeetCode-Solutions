@@ -43,32 +43,46 @@ public:
         // return next[-1+1];
         
         //another approach here we just store the maximum LIS possible till that index TC O(N^2) SC O(N) later on changed few things to print it aswell
-        int maxi=0;
-        int lastindex=0;
-        vector<int>dp(nums.size(),1),hash(nums.size());
-        for(int i=0;i<nums.size();i++){
-            hash[i]=i;
-            for(int prev=0;prev<i;prev++){
-                if(nums[prev]<nums[i] && 1+dp[prev]>dp[i]){
-                    dp[i]=1+dp[prev];
-                    hash[i]=prev;
-                }
+        // int maxi=0;
+        // int lastindex=0;
+        // vector<int>dp(nums.size(),1),hash(nums.size());
+        // for(int i=0;i<nums.size();i++){
+        //     hash[i]=i;
+        //     for(int prev=0;prev<i;prev++){
+        //         if(nums[prev]<nums[i] && 1+dp[prev]>dp[i]){
+        //             dp[i]=1+dp[prev];
+        //             hash[i]=prev;
+        //         }
+        //     }
+        //     if(dp[i]>maxi){
+        //         maxi=dp[i];
+        //         lastindex=i;
+        //     }
+        // }
+        // vector<int>lis;
+        // lis.push_back(nums[lastindex]);
+        // while(hash[lastindex]!=lastindex){
+        //     lastindex=hash[lastindex];
+        //     lis.push_back(nums[lastindex]);
+        // }
+        // reverse(lis.begin(),lis.end());
+        // for(int i=0;i<lis.size();i++){
+        //     cout<<lis[i]<<" ";
+        // }
+        // return maxi;
+        
+        //now the binary search solution  here we use lower_bound function which gives the index of that element if found or the next greater element
+        vector<int>temp;
+        temp.push_back(nums[0]);
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]>temp.back()){
+                temp.push_back(nums[i]);
             }
-            if(dp[i]>maxi){
-                maxi=dp[i];
-                lastindex=i;
+            else{
+                int index=lower_bound(temp.begin(),temp.end(),nums[i])-temp.begin();
+                temp[index]=nums[i];
             }
         }
-        vector<int>lis;
-        lis.push_back(nums[lastindex]);
-        while(hash[lastindex]!=lastindex){
-            lastindex=hash[lastindex];
-            lis.push_back(nums[lastindex]);
-        }
-        reverse(lis.begin(),lis.end());
-        for(int i=0;i<lis.size();i++){
-            cout<<lis[i]<<" ";
-        }
-        return maxi;
+        return temp.size();
     }
 };

@@ -18,6 +18,7 @@ public:
         return s1.size()<s2.size();
     }
     int longestStrChain(vector<string>& nums) {
+        //code pickeup up from LIS code and modified for our use case
         sort(nums.begin(),nums.end(),comp);
         int maxi=0;
         int lastindex=0;

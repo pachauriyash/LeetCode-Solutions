@@ -7,12 +7,15 @@ public:
             for(int prev=0;prev<i;prev++){
                 if(nums[prev]<nums[i] && 1+dp[prev]>dp[i]){
                     dp[i]=1+dp[prev];
+                    //found longes sequence so the count will be then the prev
                     count[i]=count[prev];
                 }
                 else if(nums[prev]<nums[i] && 1+dp[prev]==dp[i]){
+                    //dound another seq of same length so count will add up
                     count[i]+=count[prev];
                 }
             }
+            //taking the maximum lis until now
             maxi=max(maxi,dp[i]);
         }
         int ans=0;

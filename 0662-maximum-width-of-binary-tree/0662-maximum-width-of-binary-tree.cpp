@@ -15,7 +15,7 @@ public:
         //this version in case of too many nodes so to avoid overflow
         if(root==NULL){return 0;}
         int ans=0;
-        queue<pair<TreeNode*,long long>>qq;
+        queue<pair<TreeNode*,int>>qq;
         qq.push({root,0});
         while(!qq.empty()){
             int size=qq.size();

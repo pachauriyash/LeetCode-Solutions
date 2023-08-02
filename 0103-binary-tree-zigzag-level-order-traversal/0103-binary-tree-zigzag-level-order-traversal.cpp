@@ -18,21 +18,24 @@ public:
         
         nums.push(root);
         int len;
+        int level=0;
         while(!nums.empty()){
             len=nums.size();
             vector<int>ans;
             for(int i=0;i<len;i++){
                 TreeNode* temp=nums.front();
                 nums.pop();
-                ans.push_back(temp->val);
+                if(level%2)ans.insert(ans.begin(),temp->val);
+                else{ans.push_back(temp->val);}
                 if(temp->left!=NULL){nums.push(temp->left);}
                 if(temp->right!=NULL){nums.push(temp->right);}
             }
             an.push_back(ans);
+            level++;
         }
-        for(int i=0;i<an.size();i++){
-            if(i%2)reverse(an[i].begin(),an[i].end());
-        }
+        // for(int i=0;i<an.size();i++){
+        //     if(i%2)reverse(an[i].begin(),an[i].end());
+        // }
         return an;
     }
 };

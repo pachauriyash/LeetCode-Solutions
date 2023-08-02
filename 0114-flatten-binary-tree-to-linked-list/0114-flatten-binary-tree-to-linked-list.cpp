@@ -20,8 +20,10 @@ public:
         prev=root;
     }
     void flatten(TreeNode* root) {
-        TreeNode* prev=NULL;
-        flatten(root,prev);
+        //recursive  TC O(N) SC O(N)
+        // TreeNode* prev=NULL;
+        // flatten(root,prev);
+        //iterative TC O(N) SC O(N)
 //         stack<TreeNode*> st;
 //         if(root==NULL)return;
 //         st.push(root);
@@ -36,5 +38,17 @@ public:
 //             }
             
 //         }
+        //morris order method to thread  TC O(N) SC O(1)
+        TreeNode* curr=root;
+        while(curr!=NULL){
+            if(curr->left){
+                TreeNode* prev=curr->left;
+                while(prev->right)prev=prev->right;
+                prev->right=curr->right;
+                curr->right=curr->left;
+                curr->left=NULL;
+            }
+            curr=curr->right;
+        }
     }
 };

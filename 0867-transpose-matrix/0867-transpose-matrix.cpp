@@ -4,7 +4,7 @@ public:
         int n=matrix.size();
         int m=matrix[0].size();
         if(n==m){for(int i=0;i<n;i++){
-            for(int j=i;j<m;j++){
+            for(int j=i+1;j<m;j++){
                 swap(matrix[j][i],matrix[i][j]);
             }
         }}

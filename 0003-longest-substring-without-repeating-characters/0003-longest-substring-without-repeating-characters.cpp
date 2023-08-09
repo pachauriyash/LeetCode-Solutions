@@ -18,22 +18,46 @@ public:
         //     ans=max(ans,temp);
         // }
         // return ans;
-        unordered_set<char>mp;
+        //2 pointer approach  O(2N) SC O(N)
+//         unordered_set<char>mp;
+//         int ans=0;
+//         int l=0;
+//         int r=0;
+//         while(r<s.length()){
+//             if(mp.find(s[r])!=mp.end()){
+//                 mp.erase(s[l]);
+//                 l++;
+//             }
+//             else{
+//                 mp.insert(s[r]);
+//                 ans=max(ans,r-l+1);
+//                 r++;
+                
+//             }
+//         }
+//         return ans;
+        map<char,int>mp;
         int ans=0;
         int l=0;
         int r=0;
         while(r<s.length()){
             if(mp.find(s[r])!=mp.end()){
-                mp.erase(s[l]);
-                l++;
+                
+                if(mp[s[r]]>=l){
+                    l=mp[s[r]]+1;
+                }
+                mp[s[r]]=r;
+                ans=max(ans,r-l+1);
+                r++;
             }
             else{
-                mp.insert(s[r]);
+                mp.insert({s[r],r});
                 ans=max(ans,r-l+1);
                 r++;
                 
             }
         }
         return ans;
+        
     }
 };

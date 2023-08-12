@@ -3,7 +3,7 @@ public:
     int countTriples(int n) {
         int ans=0;
         for(int i=1;i<=n;i++){
-            for(int j=i+1;j<=n;j++){
+            for(int j=i+1;j<=sqrt(n*n-i*i);j++){
                 int temp=sqrt(i*i+j*j);
                 
                 if(temp*temp==i*i+j*j && temp<=n){

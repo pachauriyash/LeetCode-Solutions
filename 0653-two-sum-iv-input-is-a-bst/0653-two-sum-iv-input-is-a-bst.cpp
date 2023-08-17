@@ -45,18 +45,35 @@ public:
 };
 class Solution {
 public:
-    
+    void traverse(TreeNode* root,vector<int>&vt){
+        if(root==NULL)return;
+        traverse(root->left,vt);
+        vt.push_back(root->val);
+        traverse(root->right,vt);
+    }
     bool findTarget(TreeNode* root, int k) {
-        if(!root)return false;
-        BSTIterator leftt(root,false);
-        BSTIterator rightt(root,true);
-        int i=leftt.next();
-        int j=rightt.next();
+        //bruteforce solution
+        vector<int>vt;
+        traverse(root,vt);
+        int i=0;
+        int j=vt.size()-1;
         while(i<j){
-            if(i+j==k)return true;
-            else if(i+j<k){i=leftt.next();}
-            else{j=rightt.next();}
+            if(vt[i]+vt[j]==k)return true;
+            else if(vt[i]+vt[j]<k)i++;
+            else{j--;}
         }
         return false;
+        // if(!root)return false;
+        // BSTIterator leftt(root,false);
+        // BSTIterator rightt(root,true);
+        // int i=leftt.next();
+        // int j=rightt.next();
+        // while(i<j){
+        //     if(i+j==k)return true;
+        //     else if(i+j<k){i=leftt.next();}
+        //     else{j=rightt.next();}
+        // }
+        // return false;
+        
     }
 };

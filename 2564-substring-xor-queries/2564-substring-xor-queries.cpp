@@ -22,10 +22,13 @@ public:
             maxi=max(maxi,queries[i][0]^queries[i][1]);
         }
         for(int i=0;i<s.size();i++){
+            long long val=0;
             for(int j=i;j<s.size();j++){
                 if(j-i+1>30)break;
-                int temp=stringdeci(s.substr(i,j-i+1),maxi);
-                if(temp>maxi)break;
+                val = (val << 1) + (s[j] == '1');
+                int temp=val;
+                // int temp=stringdeci(s.substr(i,j-i+1),maxi);
+                // if(temp>maxi)break;
                 mp[temp].push_back({i,j});
             }
         }

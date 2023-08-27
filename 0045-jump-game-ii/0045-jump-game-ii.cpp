@@ -15,7 +15,19 @@ public:
         return dp[index]=1+ans;
     }
     int jump(vector<int>& nums) {
-        vector<int>dp(nums.size(),-1);
-        return recur(nums,0,dp);
+        //dp with memo
+        // vector<int>dp(nums.size(),-1);
+        // return recur(nums,0,dp);
+        
+        //greedy
+        int reach=0,last=0,count=0;
+        for(int i=0;i<nums.size()-1;i++){
+            reach=max(reach,i+nums[i]);
+            if(i==last){
+                last=reach;
+                count++;
+            }
+        }
+        return count;
     }
 };

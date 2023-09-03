@@ -10,7 +10,7 @@ public:
         return dphash[row][col]= recur(m,n,row+1,col,dphash) +recur(m,n,row,col+1,dphash);
     }
     int uniquePaths(int m, int n) {
-/*  this was optimising recursion to use dp memorization
+/*  this was optimising recursion to use dp memorization TC O(N*M) SC O(2*N*M)
         vector<vector<int>> dphash(m,vector<int>(n,-1));
         return recur(m,n,0,0,dphash);
         */
@@ -25,8 +25,8 @@ public:
         // }
         // return (int)result;
         
-        //following up this question in dp series previously in arrays
-        //tabulation method
+        //following up this question in dp series previously in arrays and the best method is above maths approach 
+        //tabulation method TC O(N*M) SC O(N*M)
         vector<vector<int>> dp(m,vector<int>(n,-1));
         dp[0][0]=1;
         for(int i=0;i<m;i++){

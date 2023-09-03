@@ -7,7 +7,7 @@ public:
         for(int i=0;i<nums.size();i++){
             if(nums[i]%modulo==k)count++;
             if(count%modulo==k)res++;
-            res+=mp[(count-k)%modulo];
+            res+=mp[(count+modulo-k)%modulo];
             mp[count%modulo]++;
         }
         return res;

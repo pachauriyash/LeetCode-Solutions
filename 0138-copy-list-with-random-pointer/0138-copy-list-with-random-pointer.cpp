@@ -18,39 +18,33 @@ class Solution {
 public:
     
     Node* copyRandomList(Node* head) {
-        
-        // this map points to the clone of the original node
-        map<Node*,Node*> mp;
-        
-        Node* temp=head;
-        
-        // 1st Pass - Creation of Nodes and no wiring
-        while(temp!=NULL)
-        {
-            // Pointing the original node to its clone node
-            // Now I can access the clone node in O(1)
-            mp[temp] = new Node(temp->val);
-            temp=temp->next;
-            
+       Node* temp=head;
+        while(temp!=NULL){
+            Node* temp1=new Node(temp->val);
+            temp1->next=temp->next;
+            temp->next=temp1;
+            temp=temp1->next;
         }
-        
-        // 2nd pass - Filling the next and random pointers
         temp=head;
-        
-        while(temp!=NULL)
-        {
-            // mp[ptr] is the clone node and its next is the next original
-            // node's clone node. 
-            // mp[ptr->next] refers to the clone node of ptr->next;
-            mp[temp]->next= mp[temp->next]; 
-            
-            // similar thing for the random pointer
-            mp[temp]->random=mp[temp->random];
-            
-            temp=temp->next;
+        if(head==NULL)return NULL;
+        Node* temp2=head->next;
+        while(temp!=NULL){
+            Node* randomm=temp->random;
+            if(randomm==NULL)temp2->random=NULL;
+            else temp2->random=randomm->next;
+            temp=temp2->next;
+            if(temp!=NULL)temp2=temp->next;
         }
-        
-        return mp[head];
-        
+        temp=head->next;
+        temp2=head;
+        Node* newhead=head->next;
+        while(temp->next!=NULL){
+            temp2->next=temp->next;
+            temp->next=temp->next->next;
+            temp=temp->next;
+            temp2=temp2->next;
+        }
+        temp2->next=NULL;
+        return newhead;
     }
 };

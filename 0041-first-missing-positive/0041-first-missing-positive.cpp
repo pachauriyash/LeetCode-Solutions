@@ -18,14 +18,27 @@ public:
         
         //TC O(1) SC O(1)
         int n=nums.size();
+        // for(int i=0;i<n;i++){
+        //     while(nums[i]>0 && nums[i]<=n && nums[nums[i]-1]!=nums[i]){
+        //         swap(nums[i],nums[nums[i]-1]);
+        //     }
+        // }
+        // for(int i=0;i<n;i++){
+        //     if(nums[i]==i+1){continue;}
+        //     else{return i+1;}
+        // }
+        // return n+1;
         for(int i=0;i<n;i++){
-            while(nums[i]>0 && nums[i]<=n && nums[nums[i]-1]!=nums[i]){
+            //if(i!=0 && nums[i]==nums[i-1])continue;
+            // if(nums[i]>0 && nums[i]<=n && nums[i]!=i+1 && i!=0 && nums[i]!=nums[i-1]){
+            //     swap(nums[nums[i]-1],nums[i]);
+            //     i--;
+            // }
+            while(nums[i]>0 && nums[i]<=n && nums[i]!=nums[nums[i]-1])
                 swap(nums[i],nums[nums[i]-1]);
-            }
         }
         for(int i=0;i<n;i++){
-            if(nums[i]==i+1){continue;}
-            else{return i+1;}
+            if(nums[i]!=i+1)return i+1;
         }
         return n+1;
     }

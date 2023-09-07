@@ -19,17 +19,27 @@ public:
     }
 	int search(string pat, string txt) {
 	    int i=0,j=0,count=0;
-	    map<char,int>mp2,mp;
+	    //map<char,int>mp2,mp;
+	    vector<int> freq_p(26,0);
+        vector<int> window(26,0);
 	    int n=pat.size();
-	    for(int i=0;i<n;i++)mp2[pat[i]]++;
+	    for(int i=0;i<n;i++){
+	     //   mp2[pat[i]]++;
+	     freq_p[pat[i]-'a']++;
+	    }
         while(j<txt.size()){
-            mp[txt[j]]++;
+            //mp[txt[j]]++;
+            window[txt[j]-'a']++;
             if(j-i+1==n){
-                if(mp.size()==mp2.size() && check(mp,mp2)){
-                    count++;
-                }
-                mp[txt[i]]--;
-                if(mp[txt[i]]==0)mp.erase(txt[i]);
+                // if(mp.size()==mp2.size() && check(mp,mp2)){
+                //     count++;
+                // }
+                // mp[txt[i]]--;
+                // if(mp[txt[i]]==0)mp.erase(txt[i]);
+                if(freq_p==window){
+	                count++;
+	            }
+                window[txt[i]-'a']--;
                 i++;
                 j++;
             }

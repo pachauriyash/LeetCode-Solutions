@@ -36,28 +36,45 @@ public:
 //             }
 //         }
 //         return ans;
+        //best solution TC O(N) basically instead of moving l by 1 step at a time directly jumping to where it was last found
+//         map<char,int>mp;
+//         int ans=0;
+//         int l=0;
+//         int r=0;
+//         while(r<s.length()){
+//             if(mp.find(s[r])!=mp.end()){
+                
+//                 if(mp[s[r]]>=l){
+//                     l=mp[s[r]]+1;
+//                 }
+//                 mp[s[r]]=r;
+//                 ans=max(ans,r-l+1);
+//                 r++;
+//             }
+//             else{
+//                 mp.insert({s[r],r});
+//                 ans=max(ans,r-l+1);
+//                 r++;
+                
+//             }
+//         }
+//         return ans;
+        
+        //another solution from aditya verma playlist
+        int i=0,j=0,ans=0;
         map<char,int>mp;
-        int ans=0;
-        int l=0;
-        int r=0;
-        while(r<s.length()){
-            if(mp.find(s[r])!=mp.end()){
-                
-                if(mp[s[r]]>=l){
-                    l=mp[s[r]]+1;
-                }
-                mp[s[r]]=r;
-                ans=max(ans,r-l+1);
-                r++;
+        while(j<s.size()){
+            mp[s[j]]++;
+            while(i<=j && mp.size()<j-i+1){
+                mp[s[i]]--;
+                if(mp[s[i]]==0)mp.erase(s[i]);
+                i++;
             }
-            else{
-                mp.insert({s[r],r});
-                ans=max(ans,r-l+1);
-                r++;
-                
+            if(mp.size()==j-i+1){
+                ans=max(ans,j-i+1);
             }
+            j++;
         }
         return ans;
-        
     }
 };

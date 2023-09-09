@@ -17,6 +17,21 @@ public:
         return count;
     }
     int numberOfSubstrings(string s) {
-        return s.size()*(s.size()+1)/2 -fun(s);
+        //so basically out of all non empty substring subtract all non empty substring which contain less than 3 distinct characters(a,b,c) so what will be left is containing all three characters
+        //return s.size()*(s.size()+1)/2 -fun(s);
+        
+        //another solution straight away
+        int i=0,j=0,ans=0;
+        int count[3]={0,0,0};
+        while(j<s.length()){
+            count[s[j]-'a']++;
+            while(count[0]>0 && count[1]>0 && count[2]>0){
+                count[s[i]-'a']--;
+                i++;
+            }
+            ans+=i;
+            j++;
+        }
+        return ans;
     }
 };

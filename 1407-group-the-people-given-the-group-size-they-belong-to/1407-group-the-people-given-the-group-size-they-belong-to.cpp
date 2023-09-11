@@ -7,13 +7,15 @@ public:
             mp[groupSizes[i]].push_back(i);
 
             if(mp[groupSizes[i]].size()==groupSizes[i]){
-                ans.push_back(mp[groupSizes[i]]);
-                mp.erase(groupSizes[i]);
+                ans.push_back({});
+                //ans.push_back(mp[groupSizes[i]]);
+                //mp.erase(groupSizes[i]);
+                swap(mp[groupSizes[i]],ans.back());
             }
         }
-        for(auto it:mp){
-            ans.push_back(it.second);
-        }
+        // for(auto it:mp){
+        //     ans.push_back(it.second);
+        // }
         return ans;
     }
 };

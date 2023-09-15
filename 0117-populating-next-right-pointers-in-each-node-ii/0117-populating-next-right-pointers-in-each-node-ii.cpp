@@ -18,9 +18,40 @@ public:
 
 class Solution {
 public:
-vector<vector<Node*>> levelOrder(Node* root) {
+// vector<vector<Node*>> levelOrder(Node* root) {
+//         if(root==NULL) return {};
+//         vector<vector<Node*>> an;
+//         queue<Node*>nums;
+        
+//         nums.push(root);
+//         int len;
+//         while(!nums.empty()){
+//             len=nums.size();
+//             vector<Node*>ans;
+//             for(int i=0;i<len;i++){
+//                 Node* temp=nums.front();
+//                 nums.pop();
+//                 ans.push_back(temp);
+//                 if(temp->left!=NULL){nums.push(temp->left);}
+//                 if(temp->right!=NULL){nums.push(temp->right);}
+//             }
+//             an.push_back(ans);
+//         }
+//         return an;
+//     }
+//     Node* connect(Node* root) {
+//         vector<vector<Node*>>level;
+//         level=levelOrder(root);
+//         for(int i=0;i<level.size();i++){
+//             for(int j=0;j<level[i].size()-1;j++){
+//                 level[i][j]->next=level[i][j+1];
+//             }
+//             level[i][level[i].size()-1]->next=NULL;
+//         }
+//         return root;
+//     }
+    Node* connect(Node* root) {
         if(root==NULL) return {};
-        vector<vector<Node*>> an;
         queue<Node*>nums;
         
         nums.push(root);
@@ -28,25 +59,19 @@ vector<vector<Node*>> levelOrder(Node* root) {
         while(!nums.empty()){
             len=nums.size();
             vector<Node*>ans;
-            for(int i=0;i<len;i++){
+            Node* prev=nums.front();
+            nums.pop();
+            if(prev->left!=NULL){nums.push(prev->left);}
+            if(prev->right!=NULL){nums.push(prev->right);}
+            for(int i=1;i<len;i++){
                 Node* temp=nums.front();
                 nums.pop();
-                ans.push_back(temp);
+                prev->next=temp;
+                prev=temp;
+                if(i==len-1)temp->next=NULL;
                 if(temp->left!=NULL){nums.push(temp->left);}
                 if(temp->right!=NULL){nums.push(temp->right);}
             }
-            an.push_back(ans);
-        }
-        return an;
-    }
-    Node* connect(Node* root) {
-        vector<vector<Node*>>level;
-        level=levelOrder(root);
-        for(int i=0;i<level.size();i++){
-            for(int j=0;j<level[i].size()-1;j++){
-                level[i][j]->next=level[i][j+1];
-            }
-            level[i][level[i].size()-1]->next=NULL;
         }
         return root;
     }

@@ -2,7 +2,7 @@ class Solution {
 public:
     int trailingZeroes(int n) {
         int num5=0,num10=0;
-        for(int i=1;i<=n;i++){
+        for(int i=5;i<=n;i+=5){
             int temp=i;
             if(temp%5==0){
                 while(temp%5==0){

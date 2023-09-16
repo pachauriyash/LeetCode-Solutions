@@ -10,12 +10,12 @@ public:
                     num5++;
                 }
             }
-            if(temp%10==0){
-                while(temp%10==0){
-                    temp=temp/10;
-                    num10++;
-                }
-            }
+            // if(temp%10==0){
+            //     while(temp%10==0){
+            //         temp=temp/10;
+            //         num10++;
+            //     }
+            // }
         }
         return num5+num10;
     }

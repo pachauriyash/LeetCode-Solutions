@@ -7,7 +7,6 @@ public:
             if(s[i]==')')open--;
             ans=max(ans,open);
         }
-        if(open!=0)return 0;
         return ans;
     }
 };

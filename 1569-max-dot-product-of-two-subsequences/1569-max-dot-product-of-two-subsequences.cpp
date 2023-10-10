@@ -1,16 +1,23 @@
 class Solution {
 public:
-    int maxDotProduct(vector<int>& A, vector<int>& B) {
-        int n = A.size(), m = B.size();
-        vector<vector<int>> dp(n, vector<int>(m));
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                dp[i][j] = A[i] * B[j];
-                if (i && j) dp[i][j] += max(dp[i - 1][j - 1], 0);
-                if (i) dp[i][j] = max(dp[i][j], dp[i - 1][j]);
-                if (j) dp[i][j] = max(dp[i][j], dp[i][j - 1]);
-            }
+    int recur(int i,int j,vector<int>&nums1,vector<int>&nums2,vector<vector<int>>&dp){
+        if(i==nums1.size()){
+            if(j==0)return INT_MIN;
+            return 0;
         }
-        return dp[n - 1][m - 1];
+        //if(mp.find({i,j})!=mp.end())return mp[{i,j}];
+        if(dp[i][j]!=INT_MIN)return dp[i][j];
+        int nottake=recur(i+1,j,nums1,nums2,dp);
+        int take=INT_MIN;
+        for(int k=j;k<nums2.size();k++){
+            take=max(take,nums1[i]*nums2[k]+recur(i+1,k+1,nums1,nums2,dp));
+        }
+        //mp.insert({{i,j},max(take,nottake)});
+        return dp[i][j]=max(take,nottake);
+    }
+    int maxDotProduct(vector<int>& nums1, vector<int>& nums2) {
+        map<pair<int,int>,int>mp;
+        vector<vector<int>>dp(nums1.size()+1,vector<int>(nums2.size()+1,INT_MIN));
+        return recur(0,0,nums1,nums2,dp);
     }
 };

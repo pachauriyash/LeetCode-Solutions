@@ -14,7 +14,7 @@ public:
     }
     int numSquares(int n) {
         vector<int>perf;
-        vector<int>dp(n+1,-1);
+         vector<int>dp(n+1,-1);
         for(int i=1;i<=n;i++){
             int t=sqrt(i);
             if(t*t==i){perf.push_back(i);}

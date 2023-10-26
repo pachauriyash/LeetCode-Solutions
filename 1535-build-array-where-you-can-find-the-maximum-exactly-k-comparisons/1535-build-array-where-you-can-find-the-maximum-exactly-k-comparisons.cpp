@@ -7,6 +7,7 @@ public:
             }
             return 0;
         }
+        if(len>k)return 0;
         if(dp[index][largest][len]!=-1)return dp[index][largest][len];
         int ans=0;
         for(int i=1;i<=m;i++){

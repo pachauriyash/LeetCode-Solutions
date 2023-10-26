@@ -10,41 +10,49 @@
 
 class Solution {
 public:
-    int findInMountainArray(int target, MountainArray A) {
-        int n = A.length(), l, r, m, peak = 0;
-        // find index of peak
-        l  = 0;
-        r = n - 1;
-        while (l < r) {
-            m = (l + r) / 2;
-            if (A.get(m) < A.get(m + 1))
-                l = peak = m + 1;
-            else
-                r = m;
+    
+    int findInMountainArray(int target, MountainArray &mountainArr) {
+        int len=mountainArr.length();
+        int low=0;
+        int high=len-1;
+        int index=-1;
+        while(low<high){
+            int mid=(high+low)/2;
+            //cout<<mid<<" ";
+            int ele=mountainArr.get(mid);
+            int ele2=mountainArr.get(mid+1);
+            if(ele<ele2){
+                index=mid+1;
+                low=mid+1;
+            }else{
+                high=mid;
+            }
         }
-        // find target in the left of peak
-        l = 0;
-        r = peak;
-        while (l <= r) {
-            m = (l + r) / 2;
-            if (A.get(m) < target)
-                l = m + 1;
-            else if (A.get(m) > target)
-                r = m - 1;
-            else
-                return m;
+        cout<<endl<<index;
+        if(index==-1)return -1;
+        low=0;
+        high=index;
+        while(low<=high){
+            int mid=(low+high)/2;
+            int ele=mountainArr.get(mid);
+            if(ele==target){return mid;}
+            if(ele<target){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
         }
-        // find target in the right of peak
-        l = peak;
-        r = n - 1;
-        while (l <= r) {
-            m = (l + r) / 2;
-            if (A.get(m) > target)
-                l = m + 1;
-            else if (A.get(m) < target)
-                r = m - 1;
-            else
-                return m;
+        low=index;
+        high=len-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            int ele=mountainArr.get(mid);
+            if(ele==target){return mid;}
+            if(ele<target){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
         }
         return -1;
     }
